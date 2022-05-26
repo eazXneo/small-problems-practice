@@ -22,5 +22,30 @@ Explanation: The longest substrings with no more than '3' distinct characters ar
 """
 
 # my solution
-def longest_substring_with_k_distinct(str, k):
+# broute force would be looking at all possible substrings -> O(n!)??
+# try implementing sliding window instead.
+# window is not fixed size (difficulty up..?)
+# Idea: 
+# have array
+# have start and end
+# add elem check if <=k distinct chars
+# if yes increase max
+# else delete from front until <=k?
+def longest_substring_with_k_distinct(_str, k):
+	max_substring_length , current_max , curr_window_start = 0 , 0 , 0
+	curr_substring = _str[0]
+	curr_set = set(_str[0])
+
+	for curr_window_end in range(len(str)):
+		curr_substring = curr_substring + _str[curr_window_end]
+		curr_set.add(_str[curr_window_end])
+		while len(curr_set) >= k:
+			# now invalid window.
+			check = curr_substring[curr_window_start]
+			curr_substring -= curr_substring[curr_window_start]
+			if not (check in curr_substring):
+				curr_set.discard(check)
+			curr_window_start += 1
 	
+
+	return max_substring_length
