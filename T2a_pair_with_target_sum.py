@@ -3,7 +3,7 @@
 # _Q_ @2. a)
 # _Difficulty_ easy
 
-# Problem Statement:
+# Problem Statement:
 """
 Given an array of sorted numbers and a target sum, 
 find a pair in the array whose sum is equal to the given target.
@@ -19,24 +19,25 @@ Output: [0, 2]
 Explanation: The numbers at index 0 and 2 add up to 11: 2+9=11
 """
 
+
 # my solution: brute force: look at all pairs.
 # smarter: look at only pairs only up to sum, since list is sorted?
 def MY_pair_with_targetsum(arr, target_sum):
     # two forls to point at two items
     for i in range(len(arr)):
+        # start at i, and so i==j won't happen, also avoids some repeats.
         for j in range(i, len(arr)):
-            if i==j:  # pair cannot be the same item twice
-                continue
-            # if sum is greater than target, no need to continue looking
-            if arr[i]+arr[j] > target_sum:
+            # if sum is greater than target, no need to continue looking.
+            if arr[i] + arr[j] > target_sum:
                 break
-            if arr[i]+arr[j] == target_sum:  # found a pair of indices
-                return [i,j]
+            if arr[i] + arr[j] == target_sum:  # found a pair of indices
+                return [i, j]
 
-## ANSWER
+
+## ANSWER
 def pair_with_targetsum(arr, target_sum):
     left, right = 0, len(arr) - 1
-    while(left < right):
+    while (left < right):
         current_sum = arr[left] + arr[right]
         if current_sum == target_sum:
             return [left, right]
@@ -45,7 +46,7 @@ def pair_with_targetsum(arr, target_sum):
             left += 1  # we need a pair with a bigger sum
         else:
             right -= 1  # we need a pair with a smaller sum
-    return [-1, -1]
+    return [-1, -1]  # if nothing found!
 
 
 """ Asymptotics:
@@ -60,3 +61,19 @@ For sols: the two pointers come from opposite ends until they meet.
 Kind of binary search style?
 Space complexity is O(1), just the two pointers for any size of arr
 """
+
+
+# Additional code.
+def main():
+    print("My answer:")
+    print(MY_pair_with_targetsum([1, 2, 3, 4, 6], 6))
+    print(MY_pair_with_targetsum([2, 5, 9, 11], 11))
+    print("Extra?")
+    print(MY_pair_with_targetsum([2, 3], 2))
+
+    print("Solutions:")
+    print(pair_with_targetsum([1, 2, 3, 4, 6], 6))
+    print(pair_with_targetsum([2, 5, 9, 11], 11))
+
+
+main()
