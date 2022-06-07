@@ -24,7 +24,7 @@ Explanation: The longest substrings with no more than '3' distinct characters ar
 # broute force would be looking at all possible substrings -> O(n!)??
 # try implementing sliding window instead.
 # window is not fixed size (difficulty up..?)
-# Idea: 
+# Idea: <- not bad, overall it seems right intuition with minor execution mistakes.
 # have array
 # have start and end
 # add elem check if <=k distinct chars
@@ -35,16 +35,20 @@ def MY_longest_substring_with_k_distinct(_str, k):
     curr_substring = _str[0]
     curr_set = set(_str[0])
 
-    for curr_window_end in range(len(str)):
+    for curr_window_end in range(1, len(_str)):
         curr_substring = curr_substring + _str[curr_window_end]
         curr_set.add(_str[curr_window_end])
-        while len(curr_set) >= k:
+        while len(curr_set) > k:
             # now invalid window.
-            check = curr_substring[curr_window_start]
-            curr_substring -= curr_substring[curr_window_start]
-            if not (check in curr_substring):
-                curr_set.discard(check)
+            check = _str[curr_window_start]
+            curr_substring = curr_substring[1:]
+            # check if char still in substring
+            if not (check in curr_substring):  # potentially O(n) work extra here? not sure.
+                curr_set.discard(check)  # then can delete from set
             curr_window_start += 1
+        # update the max substring length
+        if len(curr_substring) > max_substring_length:
+            max_substring_length = len(curr_substring)
 
 
     return max_substring_length
@@ -83,7 +87,28 @@ element 3 times as opposed to adding and deleteing it from the "window". """
 For sols: O(n) + while loop? -> O(n)+O(n){?} = O(n+n) = O(2n) = O(n)
     This is because inner while loop touches each elem once and runs for "each character" 
     (max. len-k chars though, more precisely, right?)
-For mine: similar?
+For mine: similar? Slightly more inefficient because no dict, instead traverse substring which could be O(n)??
+    In which case, algo ok, but data struct improvement to be made?
 Space Complexity 
 The space complexity of the algorithm is O(K), as we will be storing a maximum of ‘K+1’ characters in the HashMap.
+#So they ignore the capacity used by initial array? In IADS, I don't think they did.
 """
+
+
+# Additional code.
+def main():
+    print("My answer:")
+    print("Length of the longest substring: " + str(MY_longest_substring_with_k_distinct("araaci", 2)))
+    print("Length of the longest substring: " + str(MY_longest_substring_with_k_distinct("araaci", 1)))
+    print("Length of the longest substring: " + str(MY_longest_substring_with_k_distinct("cbbebi", 3)))
+    print("Extra?")
+    print("Length of the longest substring: " + str(MY_longest_substring_with_k_distinct("araaar", 2)))
+
+    print("Solutions:")
+    print("Length of the longest substring: " + str(longest_substring_with_k_distinct("araaci", 2)))
+    print("Length of the longest substring: " + str(longest_substring_with_k_distinct("araaci", 1)))
+    print("Length of the longest substring: " + str(longest_substring_with_k_distinct("cbbebi", 3)))
+
+
+main()
+

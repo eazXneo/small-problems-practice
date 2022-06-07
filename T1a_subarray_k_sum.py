@@ -59,11 +59,11 @@ Looks like it
 """
 
 
-# Additional code.
+# Additional code.
 def main():
     print("My answer:")
-    print("Maximum sum of a subarray of size K: " + str(my_max_sub_array_of_size_k(3, [2, 1, 5, 1, 3, 2])))
-    print("Maximum sum of a subarray of size K: " + str(my_max_sub_array_of_size_k(2, [2, 3, 4, 1, 5])))
+    print("Maximum sum of a subarray of size K: " + str(MY_max_sub_array_of_size_k(3, [2, 1, 5, 1, 3, 2])))
+    print("Maximum sum of a subarray of size K: " + str(MY_max_sub_array_of_size_k(2, [2, 3, 4, 1, 5])))
 
     print("Solutions:")
     print("Maximum sum of a subarray of size K: " + str(max_sub_array_of_size_k(3, [2, 1, 5, 1, 3, 2])))
