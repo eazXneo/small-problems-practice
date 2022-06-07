@@ -3,7 +3,7 @@
 # _Q_ @1. a)
 # _Difficulty_ easy
 
-# Problem Statement:
+# Problem Statement:
 """
 Given an array of positive numbers and a positive number ‘k’, 
 find the maximum sum of any contiguous subarray of size ‘k’.
@@ -17,13 +17,13 @@ Output: 7
 Explanation: Subarray with maximum sum is [3, 4].
 """
 
-# my solution
-def my_max_sub_array_of_size_k(k, arr):
+# my solution (brute-force, not best)
+def MY_max_sub_array_of_size_k(k, arr):
     # TODO: Write your code here
     max_sum = 0
 
-    for i in range(len(arr)-3):  # traverse the array
-        subarray = arr[i:i+3]  # take next group of k elems
+    for i in range(len(arr)-k+1):  # traverse the array
+        subarray = arr[i:i+k]  # take next group of k elems
         subarray_sum = sum(subarray)  # sum these
 
         max_sum = max(subarray_sum, max_sum)  # update max if new max
@@ -34,7 +34,7 @@ def my_max_sub_array_of_size_k(k, arr):
 def max_sub_array_of_size_k(k, arr):
     max_sum, window_sum = 0, 0
     window_start = 0
-    
+
     for window_end in range(len(arr)):
         window_sum += arr[window_end]  # add the next element
         # slide the window, we don't need to slide if we've not hit the required window size of 'k'
@@ -42,7 +42,7 @@ def max_sub_array_of_size_k(k, arr):
             max_sum = max(max_sum, window_sum)
             window_sum -= arr[window_start]  # subtract the element going out
             window_start += 1  # slide the window ahead
-        return max_sum
+    return max_sum
 
 """ Thoughts: 
 Is mine less efficient by a whole asymtotic measurement 
