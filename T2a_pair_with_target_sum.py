@@ -64,6 +64,29 @@ Space complexity is O(1), just the two pointers for any size of arr
 
 
 # Additional code.
+"""
+An Alternate approach (2)
+Read more here: https://emre.me/coding-patterns/two-pointers/
+"""
+
+def ALT_pair_with_targetsum(arr, target_sum):
+    nums = {}  # to store numbers and their indices
+    for i, num in enumerate(arr):
+        if target_sum - num in nums:
+            return [nums[target_sum - num], i]
+        else:
+            nums[arr[i]] = i
+    return [-1, -1]
+
+""" Notes for alt. approach
+size of "arr" = n
+Time complexity: O(n) <- looks at each elem once.
+Space complexity: O(n) <- need to have hashtable size of array (worst case apparently)
+    so space complexity in avg. case is what??
+    --> because this "hashTable" is actually a dictionary. So basically "Python ver. of HashTable",
+    since in Java HashTable is a dictionary right?
+"""
+
 def main():
     print("My answer:")
     print(MY_pair_with_targetsum([1, 2, 3, 4, 6], 6))
@@ -74,6 +97,9 @@ def main():
     print("Solutions:")
     print(pair_with_targetsum([1, 2, 3, 4, 6], 6))
     print(pair_with_targetsum([2, 5, 9, 11], 11))
+    print("Alternative solution")
+    print(ALT_pair_with_targetsum([1, 2, 3, 4, 6], 6))
+    print(ALT_pair_with_targetsum([2, 5, 9, 11], 11))
 
 
 main()
