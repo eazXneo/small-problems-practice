@@ -35,7 +35,11 @@ def MYbruteForce_search_triplets(arr):  # INCORRECT!
             for k in range(j+1, len(arr)):
                 if arr[i]+arr[j]+arr[k] == 0:
                     options_list.append([arr[i],arr[j],arr[k]])
-    return options_list
+    ks = sorted(options_list)
+    dedup = [set(ks[i]) for i in range(len(ks))]
+    dedup = [ks[i] for i in range(len(ks)) if dedup[i] not in dedup[:i]]
+    return dedup
+    # O(n^3 + n^2*log(n)) -> O(n^3) I think. So yay nay.
 
 def MY2_search_triplets(arr):  # DOES NOT TERMINATE!
     triplets = []
