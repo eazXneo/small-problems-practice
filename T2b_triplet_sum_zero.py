@@ -26,20 +26,19 @@ Explanation: There are two unique triplets whose sum is equal to zero.
 # hash table implementation??
 # options: 2+ve + 1-ve; 2-ve + 1+ve; x + 0 + -x
 # go through everything, save zero, two hashtables???
-def MYbruteForce_search_triplets(arr):  # INCORRECT!
-    # NOW DUPLICATES LEFT.
-    # f it, brute force first.
+def MYbruteForce_search_triplets(arr):
+    # brute force first.
     options_list = []
     for i in range(len(arr)):
         for j in range(i+1,len(arr)):
             for k in range(j+1, len(arr)):
                 if arr[i]+arr[j]+arr[k] == 0:
                     options_list.append([arr[i],arr[j],arr[k]])
-    ks = sorted(options_list)
-    dedup = [set(ks[i]) for i in range(len(ks))]
-    dedup = [ks[i] for i in range(len(ks)) if dedup[i] not in dedup[:i]]
+    options_list.sort()
+    dedup = [set(options_list[i]) for i in range(len(options_list))]
+    dedup = [options_list[i] for i in range(len(options_list)) if dedup[i] not in dedup[:i]]
     return dedup
-    # O(n^3 + n^2*log(n)) -> O(n^3) I think. So yay nay.
+    # O(n^3 + n^2*log(n) + n(?)) -> O(n^3) I think. So yay nay.
 
 def MY2_search_triplets(arr):  # DOES NOT TERMINATE!
     triplets = []
@@ -109,6 +108,8 @@ def search_pair(arr, target_sum, left, triplets):
         current_sum = arr[left] + arr[right]
         if current_sum == target_sum:  # found the triplet
             triplets.append([-target_sum, arr[left], arr[right]])
+            # left and right -=1 because if only -=1 on one side, then the last
+            # val in triplet is irrelevant, so skip immediately.
             left += 1
             right -= 1
             while left < right and arr[left] == arr[left - 1]:
