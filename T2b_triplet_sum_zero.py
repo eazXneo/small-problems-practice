@@ -47,22 +47,22 @@ def MY2_search_triplets(arr):
             k = left+1
             while current_sum>0:
                 if (current_sum+k == 0):
-                    triplets.append([i,k,j])
+                    triplets.append([left,k,right])
                     break
                 k+=1
         elif current_sum<0:
             k = right-1
             while current_sum<0:
                 if (current_sum+k == 0):
-                    triplets.append([i,k,j])
+                    triplets.append([left,k,right])
                     break
                 k-=1
         elif current_sum==0:
             # find 0! <- shouldn't have to each time.
             k = left+1
-            while k<j:
+            while k<right:
                 if arr[k] == 0:
-                    triplets.append([i,k,j])
+                    triplets.append([left,k,right])
                     break
                 k+=1
     return triplets
@@ -87,6 +87,7 @@ def MYlast_search_triplets(arr):
 ## ANSWER: does seem to adapt the (2.a)) target sum pair kind of...?
 # looks like you were "kind of getting in the right direction"?..?
 def search_triplets(arr):
+    # THEY SORT!
     arr.sort()
     triplets = []
     for i in range(len(arr)):
@@ -116,4 +117,9 @@ def search_pair(arr, target_sum, left, triplets):
 """ Asymptotics:
 For mine 1: O(n^3) <- not ideal :(, 
     sorting first potentially better? with O(n^2 * log(n))
+    my final: O(n) <- but probably one huge logic error to be honest.
+For sols: O(n*log(n)) + O(n)*O(n) = O(n^2 +(!) n*log(n)) = O(n^2)
+    sorting takes O(n*log(n)). search pair called 'n' times. 
+    this looks at one less elem each time.  
+Space complexity
 """
