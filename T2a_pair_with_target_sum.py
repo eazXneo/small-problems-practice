@@ -87,6 +87,8 @@ Space complexity: O(n) <- need to have hashtable size of array (worst case appar
     since in Java HashTable is a dictionary right?
 """
 
+
+# Additional code.
 def main():
     print("My answer:")
     print(MY_pair_with_targetsum([1, 2, 3, 4, 6], 6))
@@ -100,6 +102,5 @@ def main():
     print("Alternative solution")
     print(ALT_pair_with_targetsum([1, 2, 3, 4, 6], 6))
     print(ALT_pair_with_targetsum([2, 5, 9, 11], 11))
-
 
 main()

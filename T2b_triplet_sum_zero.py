@@ -26,17 +26,18 @@ Explanation: There are two unique triplets whose sum is equal to zero.
 # hash table implementation??
 # options: 2+ve + 1-ve; 2-ve + 1+ve; x + 0 + -x
 # go through everything, save zero, two hashtables???
-def MYbruteForce_search_triplets(arr):
+def MYbruteForce_search_triplets(arr):  # INCORRECT!
+    # NOW DUPLICATES LEFT.
     # f it, brute force first.
     options_list = []
     for i in range(len(arr)):
-        for j in range(i,len(arr)):
-            for k in range(j, len(arr)):
+        for j in range(i+1,len(arr)):
+            for k in range(j+1, len(arr)):
                 if arr[i]+arr[j]+arr[k] == 0:
-                    options_list.append([i,j,k])
+                    options_list.append([arr[i],arr[j],arr[k]])
     return options_list
 
-def MY2_search_triplets(arr):
+def MY2_search_triplets(arr):  # DOES NOT TERMINATE!
     triplets = []
     num_map = {}
     arr.sort()
@@ -67,7 +68,7 @@ def MY2_search_triplets(arr):
                 k+=1
     return triplets
 
-def MYlast_search_triplets(arr):
+def MYlast_search_triplets(arr):  # ERROR WHILE RUNNING
     # two pointers, one hashmap
     triplets = []
     left, right = 0, len(nums) - 1
@@ -86,6 +87,7 @@ def MYlast_search_triplets(arr):
 
 ## ANSWER: does seem to adapt the (2.a)) target sum pair kind of...?
 # looks like you were "kind of getting in the right direction"?..?
+# well with in-built sorting, but with the left<right....?
 def search_triplets(arr):
     # THEY SORT!
     arr.sort()
@@ -120,6 +122,24 @@ For mine 1: O(n^3) <- not ideal :(,
     my final: O(n) <- but probably one huge logic error to be honest.
 For sols: O(n*log(n)) + O(n)*O(n) = O(n^2 +(!) n*log(n)) = O(n^2)
     sorting takes O(n*log(n)). search pair called 'n' times. 
-    this looks at one less elem each time.  
-Space complexity
+    this looks at one less elem each time. so we have the O(n^2) for the for loop
+    in search_triplets() and search_pair().
+Space complexity:
+    O(n) extra space for sorting. maybe +O(n) for the triplets space??
+    Good job: sols say "Ignoring the space required for the output array, 
+    the space complexity of the above algorithm will be O(N) 
+    which is required for sorting."
 """
+
+
+# Additional code.
+def main():
+    print("My answer:")
+    print(MYbruteForce_search_triplets([-3, 0, 1, 2, -1, 1, -2]))
+    print(MYbruteForce_search_triplets([-5, 2, -1, -2, 3]))
+
+    print("Solutions:")
+    print(search_triplets([-3, 0, 1, 2, -1, 1, -2]))
+    print(search_triplets([-5, 2, -1, -2, 3]))
+
+main()
