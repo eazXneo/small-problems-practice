@@ -19,7 +19,6 @@ Explanation: Subarray with maximum sum is [3, 4].
 
 # my solution (brute-force, not best)
 def MY_max_sub_array_of_size_k(k, arr):
-    # TODO: Write your code here
     max_sum = 0
 
     for i in range(len(arr)-k+1):  # traverse the array

@@ -88,7 +88,7 @@ def MYlast_search_triplets(arr):  # ERROR WHILE RUNNING
         right+=1
     return triplets
 
-## ANSWER: does seem to adapt the (2.a)) target sum pair kind of...?
+## ANSWER: does seem to adapt the (2.a)) target sum pair kind of...?
 # looks like you were "kind of getting in the right direction"?..?
 # well with in-built sorting, but with the left<right....?
 def search_triplets(arr):
