@@ -8,7 +8,6 @@
 Given the head of a Singly LinkedList, write a function to determine if the LinkedList has a cycle in it or not.
 """
 
-
 # My solution:
 # if the slow pointer ends up in front of fast pointer, then
 class MY_Node:
@@ -30,7 +29,6 @@ def MY_has_cycle(head):
             return True
     return False
 
-
 ## ANSWER
 class Node:
     def __init__(self, value, next=None):
@@ -46,3 +44,12 @@ def has_cycle(head):
         if slow == fast:
             return True
     return False
+
+""" Asymptotics:
+For sols (mine): O(n) 
+    -> slow tortoise will be caught up with at max end of list
+Space complexity: O(1), no extra space needed (except pointers, so constant)
+"""
+
+
+# Additional code.
