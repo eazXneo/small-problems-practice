@@ -29,17 +29,18 @@ import math
 def MY_smallest_subarray_with_given_sum(s, arr):
 	curr_subarr = [arr[0]]
 	# wind_start = 0
-	shortest_subarr_len = 0
+	shortest_subarr_len = math.inf  # in sols it's =math.inf
 	for wind_end in range(1, len(arr)):
-		curr_subarr.append(wind_end)
-		if sum(curr_subarr) >= s:
+		curr_subarr.append(arr[wind_end])
+		while sum(curr_subarr) >= s:
 			if len(curr_subarr) < shortest_subarr_len:
 				shortest_subarr_len = len(curr_subarr)
+				curr_subarr.pop(0)
 			else:
 				curr_subarr.pop(0)
 				# wind_start += 1
 
-	return shortest_subarr_len  # here, no subarray found =0, in sols it's =math.inf
+	return shortest_subarr_len
 
 ## ANSWER:
 def smallest_subarray_with_given_sum(s, arr):
@@ -60,7 +61,7 @@ def smallest_subarray_with_given_sum(s, arr):
 	return min_length
 
 """ Asymptotics:
-For sols: O(n) -> Sliding-Window classic, go through array once.
+For sols: (O(n+n)) = O(n) -> Sliding-Window classic, go through array once.
 	from sols: "and the inner while loop processes each element only once, 
 	therefore the time complexity of the algorithm will be O(N+N) 
 	which is asymptotically equivalent to O(N)."
