@@ -53,6 +53,7 @@ def MY_longest_substring_with_k_distinct(_str, k):
 
     return max_substring_length
 
+
 ## ANSWER:
 def longest_substring_with_k_distinct(str, k):
     window_start = 0
@@ -109,6 +110,4 @@ def main():
     print("Length of the longest substring: " + str(longest_substring_with_k_distinct("araaci", 1)))
     print("Length of the longest substring: " + str(longest_substring_with_k_distinct("cbbebi", 3)))
 
-
 main()
-
