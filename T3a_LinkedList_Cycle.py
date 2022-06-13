@@ -15,11 +15,10 @@ class MY_Node:
         self.val = value
         self.next = next
 
-
 def MY_has_cycle(head):
     tortoise , rabbit = head , head
     # this line is more complicated than previously thought
-    while rabbit != None and rabbit.next != None:
+    while rabbit is not None and rabbit.next is not None:
         # does the order of parts matter?? It does because otherwise it exits at start!!!!
         # part B
         tortoise = tortoise.next
@@ -34,7 +33,6 @@ class Node:
     def __init__(self, value, next=None):
         self.value = value
         self.next = next
-
 
 def has_cycle(head):
     slow, fast = head, head
@@ -83,3 +81,29 @@ def main():
     print("LinkedList has cycle: " + str(has_cycle(head)))
 
 main()
+
+"""
+Similar Problems 
+Problem 1: Given the head of a LinkedList with a cycle, find the length of the cycle.
+"""
+
+# My attempt for problem 1
+def find_cycle_length(head):
+    slow, fast = head, head
+    while fast is not None and fast.next is not None:
+        fast = fast.next.next
+        slow = slow.next
+        if slow == fast:  # found the cycle
+            return calculate_cycle_length(slow)
+    return 0
+
+def calculate_cycle_length(slow):
+    cycle_pointer = slow
+    counter = 1
+
+
+"""
+Solution: We can use the above solution to find the cycle in the LinkedList. 
+Once the fast and slow pointers meet, we can save the slow pointer and iterate the whole cycle with another pointer until we see the slow pointer again to find the length of the cycle.
+Here is what our algorithm will look like:
+"""
