@@ -17,15 +17,15 @@ class MY_Node:
 
 
 def MY_has_cycle(head):
-    tortoise = head
-    rabbit = head
-    while rabbit.next.next != None or rabbit.next != None:
+    tortoise , rabbit = head , head
+    # this line is more complicated than previously thought
+    while rabbit != None and rabbit.next != None:
         # does the order of parts matter?? It does because otherwise it exits at start!!!!
         # part B
         tortoise = tortoise.next
         rabbit = rabbit.next.next
         # part A
-        if rabbit.next == tortoise:
+        if rabbit == tortoise:
             return True
     return False
 
@@ -53,3 +53,33 @@ Space complexity: O(1), no extra space needed (except pointers, so constant)
 
 
 # Additional code.
+def main():
+    print("My answer:")
+    MY_head = MY_Node(1)
+    MY_head.next = MY_Node(2)
+    MY_head.next.next = MY_Node(3)
+    MY_head.next.next.next = MY_Node(4)
+    MY_head.next.next.next.next = MY_Node(5)
+    MY_head.next.next.next.next.next = MY_Node(6)
+    # no cycle in LL Node(6).next == None
+    print("LinkedList has cycle: " + str(MY_has_cycle(MY_head)))
+    MY_head.next.next.next.next.next.next = MY_head.next.next  # making node 6 point to node 3
+    print("LinkedList has cycle: " + str(MY_has_cycle(MY_head)))
+    MY_head.next.next.next.next.next.next = MY_head.next.next.next
+    print("LinkedList has cycle: " + str(MY_has_cycle(MY_head)))
+
+    print("Solutions:")
+    head = Node(1)
+    head.next = Node(2)
+    head.next.next = Node(3)
+    head.next.next.next = Node(4)
+    head.next.next.next.next = Node(5)
+    head.next.next.next.next.next = Node(6)
+    # no cycle in LL Node(6).next == None
+    print("LinkedList has cycle: " + str(has_cycle(head)))
+    head.next.next.next.next.next.next = head.next.next  # making node 6 point to node 3
+    print("LinkedList has cycle: " + str(has_cycle(head)))
+    head.next.next.next.next.next.next = head.next.next.next
+    print("LinkedList has cycle: " + str(has_cycle(head)))
+
+main()
