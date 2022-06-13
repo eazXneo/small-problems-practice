@@ -88,11 +88,11 @@ def main():
 
 main()
 
+
 """
 Similar Problems 
 Problem 1: Given the head of a LinkedList with a cycle, find the length of the cycle.
 """
-
 
 # My attempt for problem 1
 def find_cycle_length(head):
@@ -115,7 +115,9 @@ def MY_calculate_cycle_length(slow):
 
 """
 Solution: We can use the above solution to find the cycle in the LinkedList. 
-Once the fast and slow pointers meet, we can save the slow pointer and iterate the whole cycle with another pointer until we see the slow pointer again to find the length of the cycle.
+Once the fast and slow pointers meet, we can save the slow pointer and 
+iterate the whole cycle with another pointer until we see the slow pointer again 
+to find the length of the cycle.
 Here is what our algorithm will look like:
 """
 
@@ -149,5 +151,10 @@ def main2():
     head.next.next.next.next.next.next = head.next.next.next
     print("LinkedList cycle length: " + str(find_cycle_length(head)))
 
-
 main2()
+
+""" Similar problem 1:  
+Time complexity: O(n) -> because the cycle cannot be greater than total
+    length of the LL
+Space complexity: O(1) -> only pointers needed
+"""
