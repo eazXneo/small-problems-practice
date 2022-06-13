@@ -8,14 +8,12 @@
 Given the head of a Singly LinkedList, write a function to determine if the LinkedList has a cycle in it or not.
 """
 
-
 # My solution:
 # if the slow pointer ends up in front of fast pointer, then
 class MY_Node:
     def __init__(self, value, next=None):
         self.val = value
         self.next = next
-
 
 def MY_has_cycle(head):
     tortoise, rabbit = head, head
@@ -30,13 +28,11 @@ def MY_has_cycle(head):
             return True
     return False
 
-
 ## ANSWER
 class Node:
     def __init__(self, value, next=None):
         self.value = value
         self.next = next
-
 
 def has_cycle(head):
     slow, fast = head, head
@@ -47,13 +43,11 @@ def has_cycle(head):
             return True
     return False
 
-
 """ Asymptotics:
 For sols (mine): O(n) 
     -> slow tortoise will be caught up with at max end of list
 Space complexity: O(1), no extra space needed (except pointers, so constant)
 """
-
 
 # Additional code.
 def main():
@@ -88,7 +82,6 @@ def main():
 
 main()
 
-
 """
 Similar Problems 
 Problem 1: Given the head of a LinkedList with a cycle, find the length of the cycle.
@@ -103,7 +96,6 @@ def find_cycle_length(head):
         if slow == fast:  # found the cycle
             return calculate_cycle_length(slow)
     return 0
-
 
 def MY_calculate_cycle_length(slow):
     cycle_pointer = slow.next
@@ -131,7 +123,6 @@ def calculate_cycle_length(slow):
             break
     return cycle_length
 
-
 def main2():
     print("main2()")
     # to use MY_calculate_cycle_length(), change find_cycle_length().
@@ -153,7 +144,7 @@ def main2():
 
 main2()
 
-""" Similar problem 1:  
+""" Similar problem 1:
 Time complexity: O(n) -> because the cycle cannot be greater than total
     length of the LL
 Space complexity: O(1) -> only pointers needed

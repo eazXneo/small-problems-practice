@@ -20,13 +20,10 @@ Explanation: Subarray with maximum sum is [3, 4].
 # my solution (brute-force, not best)
 def MY_max_sub_array_of_size_k(k, arr):
     max_sum = 0
-
     for i in range(len(arr)-k+1):  # traverse the array
         subarray = arr[i:i+k]  # take next group of k elems
         subarray_sum = sum(subarray)  # sum these
-
         max_sum = max(subarray_sum, max_sum)  # update max if new max
-
     return max_sum
 
 ## ANSWER:

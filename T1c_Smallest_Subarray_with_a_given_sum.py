@@ -26,7 +26,7 @@ Explanation: Smallest subarrays with a sum greater than or equal to '8' are
 
 # My solution:
 import math
-def smallest_subarray_with_given_sum(s, arr):
+def MY_smallest_subarray_with_given_sum(s, arr):
 	curr_subarr = [arr[0]]
 	# wind_start = 0
 	shortest_subarr_len = 0
@@ -39,4 +39,45 @@ def smallest_subarray_with_given_sum(s, arr):
 				curr_subarr.pop(0)
 				# wind_start += 1
 
-	return shortest_subarr_len
+	return shortest_subarr_len  # here, no subarray found =0, in sols it's =math.inf
+
+## ANSWER:
+def smallest_subarray_with_given_sum(s, arr):
+	window_sum = 0
+	min_length = math.inf
+	window_start = 0
+
+	for window_end in range(0, len(arr)):
+		window_sum += arr[window_end]  # add the next element
+		# shrink the window as small as possible until the 'window_sum' is smaller than 's'
+		while window_sum >= s:
+			# more sophisticated than my if-stmt. usage
+			min_length = min(min_length, window_end - window_start + 1)
+			window_sum -= arr[window_start]
+			window_start += 1
+	if min_length == math.inf:
+		return 0
+	return min_length
+
+""" Asymptotics:
+For sols: O(n) -> Sliding-Window classic, go through array once.
+	from sols: "and the inner while loop processes each element only once, 
+	therefore the time complexity of the algorithm will be O(N+N) 
+	which is asymptotically equivalent to O(N)."
+For mine: O(n) -> ?
+Space complexity: O(1)
+"""
+
+# Additional code.
+def main():
+	print("My answer:")
+	print("Smallest subarray length: " + str(MY_smallest_subarray_with_given_sum(7, [2, 1, 5, 2, 3, 2])))
+	print("Smallest subarray length: " + str(MY_smallest_subarray_with_given_sum(7, [2, 1, 5, 2, 8])))
+	print("Smallest subarray length: " + str(MY_smallest_subarray_with_given_sum(8, [3, 4, 1, 1, 6])))
+
+	print("Solutions:")
+	print("Smallest subarray length: " + str(smallest_subarray_with_given_sum(7, [2, 1, 5, 2, 3, 2])))
+	print("Smallest subarray length: " + str(smallest_subarray_with_given_sum(7, [2, 1, 5, 2, 8])))
+	print("Smallest subarray length: " + str(smallest_subarray_with_given_sum(8, [3, 4, 1, 1, 6])))
+
+main()

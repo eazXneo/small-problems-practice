@@ -2,5 +2,7 @@
 working on small programming exercises.
 
 Currently includes code patterns:
-* Sliding window
-* Two pointers
+* Sliding window (3)
+* Two pointers (2)
+* Fast & Slow Pointers (2)
+* Merge Intervals
