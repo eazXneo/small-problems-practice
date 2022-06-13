@@ -8,6 +8,7 @@
 Given the head of a Singly LinkedList, write a function to determine if the LinkedList has a cycle in it or not.
 """
 
+
 # My solution:
 # if the slow pointer ends up in front of fast pointer, then
 class MY_Node:
@@ -15,8 +16,9 @@ class MY_Node:
         self.val = value
         self.next = next
 
+
 def MY_has_cycle(head):
-    tortoise , rabbit = head , head
+    tortoise, rabbit = head, head
     # this line is more complicated than previously thought
     while rabbit is not None and rabbit.next is not None:
         # does the order of parts matter?? It does because otherwise it exits at start!!!!
@@ -28,11 +30,13 @@ def MY_has_cycle(head):
             return True
     return False
 
+
 ## ANSWER
 class Node:
     def __init__(self, value, next=None):
         self.value = value
         self.next = next
+
 
 def has_cycle(head):
     slow, fast = head, head
@@ -42,6 +46,7 @@ def has_cycle(head):
         if slow == fast:
             return True
     return False
+
 
 """ Asymptotics:
 For sols (mine): O(n) 
@@ -80,12 +85,14 @@ def main():
     head.next.next.next.next.next.next = head.next.next.next
     print("LinkedList has cycle: " + str(has_cycle(head)))
 
+
 main()
 
 """
 Similar Problems 
 Problem 1: Given the head of a LinkedList with a cycle, find the length of the cycle.
 """
+
 
 # My attempt for problem 1
 def find_cycle_length(head):
@@ -97,13 +104,50 @@ def find_cycle_length(head):
             return calculate_cycle_length(slow)
     return 0
 
-def calculate_cycle_length(slow):
-    cycle_pointer = slow
-    counter = 1
 
+def MY_calculate_cycle_length(slow):
+    cycle_pointer = slow.next
+    counter = 1
+    while cycle_pointer != slow:
+        cycle_pointer = cycle_pointer.next
+        counter += 1
+    return counter
 
 """
 Solution: We can use the above solution to find the cycle in the LinkedList. 
 Once the fast and slow pointers meet, we can save the slow pointer and iterate the whole cycle with another pointer until we see the slow pointer again to find the length of the cycle.
 Here is what our algorithm will look like:
 """
+
+def calculate_cycle_length(slow):
+    current = slow
+    cycle_length = 0
+    while True:
+        current = current.next
+        cycle_length += 1
+        if current == slow:
+            break
+    return cycle_length
+
+
+def main2():
+    print("main2()")
+    # to use MY_calculate_cycle_length(), change find_cycle_length().
+    # my answer seems to give same sols as sols, however,
+    # cycle just last node pointing to itself with cycle length 0(?),
+    # then mine fails I think.
+    print("Solutions:")
+    head = Node(1)
+    head.next = Node(2)
+    head.next.next = Node(3)
+    head.next.next.next = Node(4)
+    head.next.next.next.next = Node(5)
+    head.next.next.next.next.next = Node(6)
+    head.next.next.next.next.next.next = head.next.next
+    print("LinkedList cycle length: " + str(find_cycle_length(head)))
+
+    head.next.next.next.next.next.next = head.next.next.next
+    print("LinkedList cycle length: " + str(find_cycle_length(head)))
+
+
+main2()
