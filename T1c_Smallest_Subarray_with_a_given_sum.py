@@ -39,7 +39,8 @@ def MY_smallest_subarray_with_given_sum(s, arr):
 			else:
 				curr_subarr.pop(0)
 				# wind_start += 1
-
+	if shortest_subarr_len == math.inf:  # needed from sols I think.
+		return 0
 	return shortest_subarr_len
 
 ## ANSWER:
