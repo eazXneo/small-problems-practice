@@ -8,6 +8,8 @@
 Given the head of a Singly LinkedList that contains a cycle, write a function to find the starting node of the cycle.
 """
 
+# from answer
+from __future__ import print_function  # should be fine since it's not used higher up.
 # My solution:
 # looks hard :(
 class MY_Node:
@@ -36,7 +38,6 @@ def MY_find_cycle_start(head):
     return -1  # no cycle found
 
 ## ANSWER
-from __future__ import print_function  # should be fine since it's not used higher up.
 
 class Node:
     def __init__(self, value, next=None):
@@ -88,8 +89,9 @@ def find_start(head, cycle_length):
     return pointer1
 
 """ Asymptotics:
-For sols: O(n+n) = O(n)?
-For mine: 
+For sols: O(3n) = O(n)
+For mine: O(2n)... 
+    something is not quite right... 
 Space complexity: O(1) -> original LL + pointers.
 """
 
@@ -114,3 +116,53 @@ class Solution:
                     slow = slow.next
                 return slow
         return None
+
+
+# Additional code.
+def main():
+    print("My answer:")
+    head = Node(1)
+    head.next = Node(2)
+    head.next.next = Node(3)
+    head.next.next.next = Node(4)
+    head.next.next.next.next = Node(5)
+    head.next.next.next.next.next = Node(6)
+
+    head.next.next.next.next.next.next = head.next.next
+    print("LinkedList cycle start: " + str(MY_find_cycle_start(head)))
+    head.next.next.next.next.next.next = head.next.next.next
+    print("LinkedList cycle start: " + str(MY_find_cycle_start(head)))
+    head.next.next.next.next.next.next = head
+    print("LinkedList cycle start: " + str(MY_find_cycle_start(head)))
+
+    print("Solutions:")
+    head = Node(1)
+    head.next = Node(2)
+    head.next.next = Node(3)
+    head.next.next.next = Node(4)
+    head.next.next.next.next = Node(5)
+    head.next.next.next.next.next = Node(6)
+
+    head.next.next.next.next.next.next = head.next.next
+    print("LinkedList cycle start: " + str(find_cycle_start(head).value))
+    head.next.next.next.next.next.next = head.next.next.next
+    print("LinkedList cycle start: " + str(find_cycle_start(head).value))
+    head.next.next.next.next.next.next = head
+    print("LinkedList cycle start: " + str(find_cycle_start(head).value))
+
+    print("Alternative solution:")
+    head = Node(1)
+    head.next = Node(2)
+    head.next.next = Node(3)
+    head.next.next.next = Node(4)
+    head.next.next.next.next = Node(5)
+    head.next.next.next.next.next = Node(6)
+
+    head.next.next.next.next.next.next = head.next.next
+    print("LinkedList cycle start: " + str(find_cycle_start(head).value))
+    head.next.next.next.next.next.next = head.next.next.next
+    print("LinkedList cycle start: " + str(find_cycle_start(head).value))
+    head.next.next.next.next.next.next = head
+    print("LinkedList cycle start: " + str(find_cycle_start(head).value))
+
+main()
