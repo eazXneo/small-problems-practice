@@ -39,7 +39,6 @@ def MY_find_cycle_start(head):
     return -1  # no cycle found
 
 ## ANSWER
-
 class Node:
     def __init__(self, value, next=None):
         self.value = value
@@ -91,7 +90,7 @@ def find_start(head, cycle_length):
 
 """ Asymptotics:
 For sols: O(3n) = O(n)
-For mine: O(2n)... 
+For mine: O(2n)... = O(n)
     something is not quite right... 
 Space complexity: O(1) -> original LL + pointers.
 """
