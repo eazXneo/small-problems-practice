@@ -29,7 +29,7 @@ def MY_find_cycle_start(head):
         if fast == slow:
             # found a cycle
             find_cycle = head  # new pointer
-            position = 0  # counter for position of cycle start
+            position = 1  # counter for position of cycle start
             while find_cycle != slow:
                 find_cycle = find_cycle.next
                 slow = slow.next
@@ -119,6 +119,7 @@ class Solution:
 
 
 # Additional code.
+# BEWARE: Starts index at 1!
 def main():
     print("My answer:")
     head = Node(1)
