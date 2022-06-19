@@ -7,6 +7,7 @@
 """
 Given the head of a Singly LinkedList that contains a cycle, write a function to find the starting node of the cycle.
 """
+# NOTES: TAKE CARE WHEN RETURNING NODE / VALUE DIRECTLY !?!
 
 # from answer
 from __future__ import print_function  # should be fine since it's not used higher up.
@@ -101,21 +102,20 @@ class ListNode:
         self.val = val
         self.next = None
 
-class Solution:
-    def detectCycle(self, head: ListNode) -> ListNode:
-        slow, fast = head, head
+def detectCycle(head: Node) -> Node:
+    slow, fast = head, head
 
-        while fast is not None and fast.next is not None:
-            fast = fast.next.next
-            slow = slow.next
+    while fast is not None and fast.next is not None:
+        fast = fast.next.next
+        slow = slow.next
 
-            if slow == fast:
-                current = head
-                while current is not slow:
-                    current = current.next
-                    slow = slow.next
-                return slow
-        return None
+        if slow == fast:
+            current = head
+            while current is not slow:
+                current = current.next
+                slow = slow.next
+            return slow.value
+    return None
 
 
 # Additional code.
@@ -137,13 +137,6 @@ def main():
     print("LinkedList cycle start: " + str(MY_find_cycle_start(head)))
 
     print("Solutions:")
-    head = Node(1)
-    head.next = Node(2)
-    head.next.next = Node(3)
-    head.next.next.next = Node(4)
-    head.next.next.next.next = Node(5)
-    head.next.next.next.next.next = Node(6)
-
     head.next.next.next.next.next.next = head.next.next
     print("LinkedList cycle start: " + str(find_cycle_start(head).value))
     head.next.next.next.next.next.next = head.next.next.next
@@ -152,18 +145,10 @@ def main():
     print("LinkedList cycle start: " + str(find_cycle_start(head).value))
 
     print("Alternative solution:")
-    head = Node(1)
-    head.next = Node(2)
-    head.next.next = Node(3)
-    head.next.next.next = Node(4)
-    head.next.next.next.next = Node(5)
-    head.next.next.next.next.next = Node(6)
-
     head.next.next.next.next.next.next = head.next.next
-    print("LinkedList cycle start: " + str(find_cycle_start(head).value))
+    print("LinkedList cycle start: " + str(detectCycle(head)))
     head.next.next.next.next.next.next = head.next.next.next
-    print("LinkedList cycle start: " + str(find_cycle_start(head).value))
+    print("LinkedList cycle start: " + str(detectCycle(head)))
     head.next.next.next.next.next.next = head
-    print("LinkedList cycle start: " + str(find_cycle_start(head).value))
-
+    print("LinkedList cycle start: " + str(detectCycle(head)))
 main()
