@@ -25,28 +25,57 @@ Explanation: Since all the given intervals overlap, we merged them into one.
 from __future__ import print_function
 # My solution:
 class interval:
-	def __init__(self, start, end):
- 		self.start = start
- 		self.end = end
+    def __init__(self, start, end):
+        self.start = start
+        self.end = end
+    # from answers:
+    def print_interval(self):
+        print("[" + str(self.start) + ", " + str(self.end) + "]", end='')
+
 
 final_intervals = []
-# I think intervals and final_intervals are being mixed up :(
+# I think intervals and final_intervals are being mixed up :(
+def MY_merge(intervals):
+    if len(intervals) == 1:
+        return final_intervals.apppend(intervals)
+    else:
+        current = intervals[0]
+        for interval in final_intervals:
+            if interval.start < current.start and interval.end > current.end:  # case 1
+                continue
+            elif interval.start < current.start and interval.end < current.end:  # case 2
+                interval.end = current.end
+            elif interval.start > current.start and interval.end > current.end:  # case 3
+                interval.start = current.start
+            elif interval.start > current.start and interval.end < current.end:  # case 4
+                interval.start = current.start
+                interval.end = current.end
+            else:  # no overlap
+                final_intervals.apppend(current)
+        merge(intervals[1:])
+    return final_intervals
+
+
+## ANSWER
 def merge(intervals):
-	if len(intervals)==1:
-		return final_intervals.apppend(intervals)
-	else:
-		current = intervals[0]
-		for interval in final_intervals:
-			if interval.start<current.start and interval.end>current.end:  # case 1
-				continue
-			elif interval.start<current.start and interval.end<current.end:  # case 2
-				interval.end = current.end
-			elif interval.start>current.start and interval.end>current.end:  # case 3
-				interval.start = current.start
-			elif interval.start>current.start and interval.end<current.end:  # case 4
-				interval.start = current.start
-				interval.end = current.end
-			else:  # no overlap
-				final_intervals.apppend(current)
-		merge(intervals[1:])
-	return final_intervals
+    if len(intervals) < 2:
+        return intervals
+
+    # sort the intervals on the start time
+    intervals.sort(key=lambda x: x.start)
+
+    mergedIntervals = []
+    start = intervals[0].start
+    end = intervals[0].end
+    for i in range(1, len(intervals)):
+        interval = intervals[i]
+        if interval.start <= end:  # overlapping intervals, adjust the 'end'
+            end = max(interval.end, end)
+        else:  # non-overlapping interval, add the previous internval and reset
+            mergedIntervals.append(Interval(start, end))
+            start = interval.start
+            end = interval.end
+
+    # add the last interval
+    mergedIntervals.append(Interval(start, end))
+    return mergedIntervals
