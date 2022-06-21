@@ -59,27 +59,38 @@ def MY_merge(intervals):  # at least it runs?
         merge(intervals[1:])
     return final_intervals
 
+# incorrect. abandonded
 def MY2_merge(intervals):  # try 2
-    if len(intervals) == 1:
-        return final_intervals.apppend(intervals)
-    else:
-        current = intervals[0]
-        for interval in intervals:
-            if interval is current:
+    final_intervs = []
+    # choose one, go through list adding on.
+    # finally append to final_intervs
+    # delete from intervals and start over
+    current = intervals[0]
+    while len(intervals) != 0:
+        for interv in intervals:
+            # check (+ merge?)
+            if interv.start < current.start and interv.end > current.start:
+                new_interv = Interval(interv.start, max(interv.end, current.end))
+                final_intervs.append(new_interv)
+                intervals.remove(current)
+                intervals.remove(interv)
+            elif interv.start > current.start and interv.start < current.end:
+                new_interv = Interval(current.start, max(interv.end, current.end))
+                final_intervs.append(new_interv)
+                intervals.remove(current)
+                intervals.remove(interv)
+            else: # no overlap
                 continue
-            if interval.start < current.start and interval.end > current.end:  # case 1
-                continue
-            elif interval.start < current.start and interval.end < current.end:  # case 2
-                interval.end = current.end
-            elif interval.start > current.start and interval.end > current.end:  # case 3
-                interval.start = current.start
-            elif interval.start > current.start and interval.end < current.end:  # case 4
-                interval.start = current.start
-                interval.end = current.end
-            else:  # no overlap
-                final_intervals.append(current)
-        merge(intervals[1:])
-    return final_intervals
+        if current == intervals[0]:
+            if len(intervals) != 1:
+                current = intervals[1]
+            else:
+                final_intervs.append(intervals[0])
+                intervals.pop(0)
+        else:
+            current = intervals[0]
+    # check final invterval
+    return final_intervs
 
 ## ANSWER
 def merge(intervals):
@@ -107,24 +118,24 @@ def merge(intervals):
 
 """ Asymptotics:
 For sols: O(n * log(n)) -> sorting + for loop (O(n))
-For mine: O(n) * O(n) = O(n^2) ?? because n levels of recursion '*' for loop?
+For mine: n/a
 Space complexity: O(n) -> store solution (and sorting). ok.
 """
 
 
 # Additional code
 def main():
-    print("My answer:")
+    print("My answer (INCORRECT! probably need way of comparing intervals for euality.):")
     print("Merged intervals: ", end='')
-    for i in MY_merge([Interval(1, 4), Interval(2, 5), Interval(7, 9)]):
+    for i in MY2_merge([Interval(1, 4), Interval(2, 5), Interval(7, 9)]):
         i.print_interval()
     print()
     print("Merged intervals: ", end='')
-    for i in MY_merge([Interval(6, 7), Interval(2, 4), Interval(5, 9)]):
+    for i in MY2_merge([Interval(6, 7), Interval(2, 4), Interval(5, 9)]):
         i.print_interval()
     print()
     print("Merged intervals: ", end='')
-    for i in MY_merge([Interval(1, 4), Interval(2, 6), Interval(3, 5)]):
+    for i in MY2_merge([Interval(1, 4), Interval(2, 6), Interval(3, 5)]):
         i.print_interval()
     print()
 
