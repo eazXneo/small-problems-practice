@@ -48,7 +48,7 @@ def cyclic_sort(nums):
 	return nums
 
 """ Asymptotics:
-For sols: O(n) -> each elem touched once
+For sols: O(n) + O(n-1) = O(n) -> each elem touched once (not quite sure about the O(n)+O(n-1) part)
 	"Although we are not incrementing the index i when swapping the numbers, this will result in 
 	more than ‘n’ iterations of the loop, but in the worst-case scenario, the while loop will 
 	swap a total of ‘n-1’ numbers and once a number is at its correct index, we will move on to 
