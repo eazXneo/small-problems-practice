@@ -24,7 +24,7 @@ Explanation: Since all the given intervals overlap, we merged them into one.
 # from answer
 from __future__ import print_function
 # My solution:
-class interval:
+class Interval:
     def __init__(self, start, end):
         self.start = start
         self.end = end
@@ -33,14 +33,18 @@ class interval:
         print("[" + str(self.start) + ", " + str(self.end) + "]", end='')
 
 
+# trying do brute-force.
 final_intervals = []
 # I think intervals and final_intervals are being mixed up :(
-def MY_merge(intervals):
+# abandoning recursion currently and the weirdly incorrect interval classification
+def MY_merge(intervals):  # at least it runs?
     if len(intervals) == 1:
         return final_intervals.apppend(intervals)
     else:
         current = intervals[0]
-        for interval in final_intervals:
+        for interval in intervals:
+            if interval is current:
+                continue
             if interval.start < current.start and interval.end > current.end:  # case 1
                 continue
             elif interval.start < current.start and interval.end < current.end:  # case 2
@@ -51,10 +55,31 @@ def MY_merge(intervals):
                 interval.start = current.start
                 interval.end = current.end
             else:  # no overlap
-                final_intervals.apppend(current)
+                final_intervals.append(current)
         merge(intervals[1:])
     return final_intervals
 
+def MY2_merge(intervals):  # try 2
+    if len(intervals) == 1:
+        return final_intervals.apppend(intervals)
+    else:
+        current = intervals[0]
+        for interval in intervals:
+            if interval is current:
+                continue
+            if interval.start < current.start and interval.end > current.end:  # case 1
+                continue
+            elif interval.start < current.start and interval.end < current.end:  # case 2
+                interval.end = current.end
+            elif interval.start > current.start and interval.end > current.end:  # case 3
+                interval.start = current.start
+            elif interval.start > current.start and interval.end < current.end:  # case 4
+                interval.start = current.start
+                interval.end = current.end
+            else:  # no overlap
+                final_intervals.append(current)
+        merge(intervals[1:])
+    return final_intervals
 
 ## ANSWER
 def merge(intervals):
@@ -62,7 +87,7 @@ def merge(intervals):
         return intervals
 
     # sort the intervals on the start time
-    intervals.sort(key=lambda x: x.start)
+    intervals.sort(key=lambda x: x.start)  # SORTING N*LOG(N)!!
 
     mergedIntervals = []
     start = intervals[0].start
@@ -76,6 +101,45 @@ def merge(intervals):
             start = interval.start
             end = interval.end
 
-    # add the last interval
+    # add the last interval  # what??
     mergedIntervals.append(Interval(start, end))
     return mergedIntervals
+
+""" Asymptotics:
+For sols: O(n * log(n)) -> sorting + for loop (O(n))
+For mine: O(n) * O(n) = O(n^2) ?? because n levels of recursion '*' for loop?
+Space complexity: O(n) -> store solution (and sorting). ok.
+"""
+
+
+# Additional code
+def main():
+    print("My answer:")
+    print("Merged intervals: ", end='')
+    for i in MY_merge([Interval(1, 4), Interval(2, 5), Interval(7, 9)]):
+        i.print_interval()
+    print()
+    print("Merged intervals: ", end='')
+    for i in MY_merge([Interval(6, 7), Interval(2, 4), Interval(5, 9)]):
+        i.print_interval()
+    print()
+    print("Merged intervals: ", end='')
+    for i in MY_merge([Interval(1, 4), Interval(2, 6), Interval(3, 5)]):
+        i.print_interval()
+    print()
+
+    print("Solutions:")
+    print("Merged intervals: ", end='')
+    for i in merge([Interval(1, 4), Interval(2, 5), Interval(7, 9)]):
+        i.print_interval()
+    print()
+    print("Merged intervals: ", end='')
+    for i in merge([Interval(6, 7), Interval(2, 4), Interval(5, 9)]):
+        i.print_interval()
+    print()
+    print("Merged intervals: ", end='')
+    for i in merge([Interval(1, 4), Interval(2, 6), Interval(3, 5)]):
+        i.print_interval()
+    print()
+
+main()
