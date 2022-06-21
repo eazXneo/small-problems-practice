@@ -29,8 +29,9 @@ def cyclic_sort(nums):
 	# keep swapping elements until in place??
 	for i, elem in nums:
 		temp = elem
-		while i != elem:
+		while i != temp:
 			# swap
 			nums[i] = nums[temp]
 			nums[temp] = temp
 			temp = nums[i]
+	return nums
