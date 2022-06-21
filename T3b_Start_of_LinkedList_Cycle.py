@@ -89,8 +89,8 @@ def find_start(head, cycle_length):
     return pointer1
 
 """ Asymptotics:
-For sols: O(3n) = O(n)
-For mine: O(2n)... = O(n)
+For sols: O(n), (O(3n)) -->
+For mine: O(n), (O(2n)) -->
     something is not quite right... 
 Space complexity: O(1) -> original LL + pointers.
 """
