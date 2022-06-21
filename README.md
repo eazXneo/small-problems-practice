@@ -5,4 +5,5 @@ Currently includes code patterns:
 * Sliding window (3)
 * Two pointers (2)
 * Fast & Slow Pointers (2)
-* Merge Intervals
+* Merge Intervals (1)
+* Cyclic Sort
