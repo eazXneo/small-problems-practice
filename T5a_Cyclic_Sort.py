@@ -25,13 +25,50 @@ Output: [1, 2, 3, 4, 5, 6]
 """
 
 # My solution:
-def cyclic_sort(nums):
-	# keep swapping elements until in place??
-	for i, elem in nums:
-		temp = elem
+def MY_cyclic_sort(nums):
+	# keep swapping elements until in place??
+	for i, elem in enumerate(nums):
+		temp = elem-1
 		while i != temp:
 			# swap
 			nums[i] = nums[temp]
-			nums[temp] = temp
-			temp = nums[i]
+			nums[temp] = temp+1
+			temp = nums[i]-1
 	return nums
+
+## ANSWER
+def cyclic_sort(nums):
+	i = 0
+	while i < len(nums):
+		j = nums[i] - 1
+		if nums[i] != nums[j]:
+			nums[i], nums[j] = nums[j], nums[i]  # swap
+		else:
+			i += 1
+	return nums
+
+""" Asymptotics:
+For sols: O(n) -> each elem touched once
+	"Although we are not incrementing the index i when swapping the numbers, this will result in 
+	more than ‘n’ iterations of the loop, but in the worst-case scenario, the while loop will 
+	swap a total of ‘n-1’ numbers and once a number is at its correct index, we will move on to 
+	the next number by incrementing i. So overall, our algorithm will take O(n) + O(n-1) which is 
+	asymptotically equivalent to O(n)."
+For mine: O(n) -> same as above but slightly more inefficient?
+Space complexity: O(1) -> we are sorting in-place by swapping elements?
+"""
+
+
+# Additional code
+def main():
+	print("My answer:")
+	print(MY_cyclic_sort([3, 1, 5, 4, 2]))
+	print(MY_cyclic_sort([2, 6, 4, 3, 1, 5]))
+	print(MY_cyclic_sort([1, 5, 6, 4, 3, 2]))
+
+	print("Solutions:")
+	print(cyclic_sort([3, 1, 5, 4, 2]))
+	print(cyclic_sort([2, 6, 4, 3, 1, 5]))
+	print(cyclic_sort([1, 5, 6, 4, 3, 2]))
+
+main()

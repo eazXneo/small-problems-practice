@@ -22,7 +22,7 @@ Explanation: Since all the given intervals overlap, we merged them into one.
 """
 
 # from answer
-from __future__ import print_function
+# from __future__ import print_function  # what's this for....
 # My solution:
 class Interval:
     def __init__(self, start, end):
