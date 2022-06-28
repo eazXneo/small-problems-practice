@@ -16,8 +16,15 @@ class Node:
 	def __init__(self, value, next=None):
 		self.value = value
 		self.next = next
+	# from answers:
+	def print_list(self):
+		temp = self
+		while temp is not None:
+			print(temp.value, end=" ")
+			temp = temp.next
+		print()
 
-def reverse(head):
+def MY_reverse(head):
 	# pointer to last, curr and next
 	last = head
 	_next = head.next
@@ -31,3 +38,13 @@ def reverse(head):
 		_next = head.next
 
 	return head
+
+## ANSWER
+def reverse(head):
+	previous, current, next = None, head, None
+	while current is not None:
+		next = current.next  # temporarily store the next node
+		current.next = previous  # reverse the current node
+		previous = current  # before we move to the next node, point previous to the current node
+		current = next  # move on the next node
+	return previous
