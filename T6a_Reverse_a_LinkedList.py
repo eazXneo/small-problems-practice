@@ -29,14 +29,14 @@ def MY_reverse(head):
 	last = head
 	_next = head.next
 	last.next = None
-	head = _next
+	new_head = _next
 	while _next is not None:
-		head.next = last
-		last = head
-		head = _next
-		_next = head.next
+		_next = new_head.next
+		new_head.next = last
+		last = new_head
+		new_head = _next
 
-	return head
+	return new_head  # new_head = old tail :(
 
 ## ANSWER
 def reverse(head):
