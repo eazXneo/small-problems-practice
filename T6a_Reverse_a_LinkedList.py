@@ -29,14 +29,14 @@ def MY_reverse(head):
 	last = head
 	_next = head.next
 	last.next = None
-	new_head = _next
+	current = _next
 	while _next is not None:
-		_next = new_head.next
-		new_head.next = last
-		last = new_head
-		new_head = _next
+		_next = current.next
+		current.next = last
+		last = current
+		current = _next
 
-	return new_head  # new_head = old tail :(
+	return last  # current = None (at end originally), last = new head
 
 ## ANSWER
 def reverse(head):
@@ -51,6 +51,35 @@ def reverse(head):
 
 """ Asymptotics:
 For sols: O(n) <- goes through list one time
-For mine: O(n) <- also goes through list one time but probably doesn't run.
+For mine: O(n) <- also goes through list one time but probably doesn't run. :((
 Space complexity: O(1) <- 3 pointers, irrespective of size of LL
 """
+
+def main():
+	MY_head = Node(2)
+	MY_head.next = Node(4)
+	MY_head.next.next = Node(6)
+	MY_head.next.next.next = Node(8)
+	MY_head.next.next.next.next = Node(10)
+
+	print("My answer:")
+	print("Nodes of original LinkedList are: ", end='')
+	MY_head.print_list()
+	result = MY_reverse(MY_head)
+	print("Nodes of reversed LinkedList are: ", end='')
+	result.print_list()
+
+	head = Node(2)
+	head.next = Node(4)
+	head.next.next = Node(6)
+	head.next.next.next = Node(8)
+	head.next.next.next.next = Node(10)
+
+	print("Solutions:")
+	print("Nodes of original LinkedList are: ", end='')
+	head.print_list()
+	result = reverse(head)
+	print("Nodes of reversed LinkedList are: ", end='')
+	result.print_list()
+
+main()
