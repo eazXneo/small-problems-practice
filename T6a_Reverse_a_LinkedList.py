@@ -32,7 +32,6 @@ def MY_reverse(head):
 	head = _next
 	while _next is not None:
 		head.next = last
-
 		last = head
 		head = _next
 		_next = head.next
@@ -42,9 +41,16 @@ def MY_reverse(head):
 ## ANSWER
 def reverse(head):
 	previous, current, next = None, head, None
+	# well organised: INTERNALISE THIS!!!
 	while current is not None:
 		next = current.next  # temporarily store the next node
 		current.next = previous  # reverse the current node
 		previous = current  # before we move to the next node, point previous to the current node
 		current = next  # move on the next node
 	return previous
+
+""" Asymptotics:
+For sols: O(n) <- goes through list one time
+For mine: O(n) <- also goes through list one time but probably doesn't run.
+Space complexity: O(1) <- 3 pointers, irrespective of size of LL
+"""
