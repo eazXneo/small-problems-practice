@@ -1,4 +1,4 @@
-# https://github.com/cl2333/Grokking-the-Coding-Interview-Patterns-for-Coding-Questions/blob/master/7.%20Pattern%20Breath%20Depth%20First%20Search/Binary%20Tree%20Level%20Order%20Traversal%20(easy).py
+# https://github.com/cl2333/Grokking-the-Coding-Interview-Patterns-for-Coding-Questions/blob/master/8.%20Pattern%20Tree%20Depth%20First%20Search/Binary%20Tree%20Path%20Sum%20(easy).py
 # _Topic_ @8 Pattern: Tree Depth First Search
 # _Q_ @8. a)
 # _Difficulty_ easy

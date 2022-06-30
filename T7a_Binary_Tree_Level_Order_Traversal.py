@@ -13,11 +13,11 @@ to right in separate sub-arrays.
 
 # My solution:
 class TreeNode:
-  def __init__(self, val):
-    self.val = val
-    self.left, self.right = None, None
+	def __init__(self, val):
+		self.val = val
+		self.left, self.right = None, None
 
-def traverse(root):
+def MY_traverse(root):
 	# array
 	tree_array = []
 	# use BFS
@@ -26,10 +26,68 @@ def traverse(root):
 		# find children, add to queue
 		# add to array, contiue?
 		current = queue.pop(0)
-		tree_array.append(current)
+		tree_array.append(current.val)
+		if current is None:
+			continue
+		if current.left is None and current.right is not None:
+			continue
+
 		if current.left is not None:
 			queue.append(current.left)
+		else:
+			tree_array.append(None)
+
 		if current.right is not None:
 			queue.append(current.right)
+		else:
+			tree_array.append(None)
 
 	return tree_array
+
+## ANSWER
+from collections import deque
+
+
+def traverse(root):
+	result = []
+	if root is None:
+		return result
+
+	queue = deque()
+	queue.append(root)
+	while queue:
+		levelSize = len(queue)
+		currentLevel = []
+		for _ in range(levelSize):
+			currentNode = queue.popleft()
+			# add the node to the current level
+			currentLevel.append(currentNode.val)
+			# insert the children of current node in the queue
+			if currentNode.left:
+				queue.append(currentNode.left)
+			if currentNode.right:
+				queue.append(currentNode.right)
+
+		result.append(currentLevel)
+
+	return result
+
+def main():
+	print("My answer:")
+	root = TreeNode(12)
+	root.left = TreeNode(7)
+	root.right = TreeNode(1)
+	root.left.left = TreeNode(9)
+	root.right.left = TreeNode(10)
+	root.right.right = TreeNode(5)
+	print("Level order traversal: " + str(MY_traverse(root)))
+
+	print("Solutions:")
+	root2 = TreeNode(12)
+	root2.left = TreeNode(7)
+	root2.right = TreeNode(1)
+	root2.left.left = TreeNode(9)
+	root2.right.left = TreeNode(10)
+	root2.right.right = TreeNode(5)
+	print("Level order traversal: " + str(traverse(root2)))
+main()
