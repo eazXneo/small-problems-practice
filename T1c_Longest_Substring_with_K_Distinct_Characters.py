@@ -1,6 +1,6 @@
 # _source_ https://github.com/cl2333/Grokking-the-Coding-Interview-Patterns-for-Coding-Questions/blob/master/1.%20Pattern%20Sliding%20Window/Maximum%20Sum%20Subarray%20of%20Size%20K%20(easy).py
 # _Topic_ @1 Pattern: Sliding Window
-# _Q_ @1. b)
+# _Q_ @1. c)
 # _Difficulty_ medium
 
 # Problem Statement:

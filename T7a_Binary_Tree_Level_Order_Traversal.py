@@ -29,26 +29,21 @@ def MY_traverse(root):
 		tree_array.append(current.val)
 		if current is None:
 			continue
-		if current.left is None and current.right is not None:
-			continue
-
 		if current.left is not None:
 			queue.append(current.left)
-		else:
-			tree_array.append(None)
-
+		# else:
+		# 	tree_array.append(None)
 		if current.right is not None:
 			queue.append(current.right)
-		else:
-			tree_array.append(None)
+		# else:
+		# 	tree_array.append(None)
 
 	return tree_array
 
 ## ANSWER
 from collections import deque
 
-
-def traverse(root):
+def traverse(root):  # looks a bit more professional
 	result = []
 	if root is None:
 		return result
@@ -67,12 +62,17 @@ def traverse(root):
 				queue.append(currentNode.left)
 			if currentNode.right:
 				queue.append(currentNode.right)
-
 		result.append(currentLevel)
 
 	return result
 
-def main():
+""" Asymptotics:
+For sols: O(n) <- accesses each node of the tree once and appends it to the array
+For mine: O(n) 
+Space complexity: 
+"""
+
+def main():  # my answer does not have additional lists for levels. Otherwise looks ok.
 	print("My answer:")
 	root = TreeNode(12)
 	root.left = TreeNode(7)
@@ -90,4 +90,5 @@ def main():
 	root2.right.left = TreeNode(10)
 	root2.right.right = TreeNode(5)
 	print("Level order traversal: " + str(traverse(root2)))
+	
 main()
