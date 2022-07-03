@@ -53,7 +53,7 @@ def find_longest_substring(exl_string):
 # approach 1
 def non_repeat_substring(str):
     max_len, win_start = 0, 0
-    dict_str = {}
+    dict_str = {}  # holds count of instances of this char in substring.
 
     for win_end in range(len(str)):
         if str[win_end] not in dict_str:
@@ -61,7 +61,7 @@ def non_repeat_substring(str):
         else:
             dict_str[str[win_end]] += 1
 
-        while len(dict_str) < sum(dict_str.values()):
+        while len(dict_str) < sum(dict_str.values()):  #smart conditional
             if dict_str[str[win_start]] == 1:
                 del dict_str[str[win_start]]
             else:
@@ -73,7 +73,7 @@ def non_repeat_substring(str):
     return max_len
 
 # approach 2 (cleaner?)
-def non_repeat_substring(str):
+def A2_non_repeat_substring(str):
     window_start = 0
     max_length = 0
     char_index_map = {}
@@ -93,11 +93,42 @@ def non_repeat_substring(str):
         max_length = max(max_length, window_end - window_start + 1)
     return max_length
 
+""" Asymptotics:
+For sols: O(n) <- visible in A2: there is only one for loop. 
+For mine: O(n) <- window end and window start move at most n times, so each elem
+    gets accessed and then "discarded" once.
+Space complexity: O(n) <- the char_index_map can be at most size 'n'. 
+    I forgot to say two things: 
+    1) space complexity more accurately is O(k), where 'k' is number of distinct chars and k <=n. 
+    2) assuming we expect a "standard" set of chars as input (like English alphabet has 26 letters),
+    then the space complexity will be O(1) since the maximum consecutive non-repeating substring
+    will be of length 26 for whatever input size. From sols: "in this case, we can use a fixed-size 
+    array instead of the HashMap." <- ?? just this last part.
+        <- https://stackoverflow.com/questions/30009987/space-complexity-of-java-data-structures also
+        https://stackoverflow.com/questions/3104281/what-is-the-space-complexity-of-hashtable-array-arraylist-linkedlist-etcif-a
+        something about HashMap taking up more space than array in Java?
+"""
 
+
+# Additional code
 def main():
-    print(find_longest_substring("aabccbb"))
-    print(find_longest_substring("abbbb"))
-    print(find_longest_substring("abccde"))
+    print("My answer:")
+    print("Length of the longest substring: " + str(find_longest_substring("aabccbb")))
+    print("Length of the longest substring: " + str(find_longest_substring("abbbb")))
+    print("Length of the longest substring: " + str(find_longest_substring("abccde")))
+    print("Extra:")
+    print("Length of the longest substring: " + str(find_longest_substring("bbbb")))
+    print("Length of the longest substring: " + str(find_longest_substring("")))
 
+    print("Solutions 1:")
+    print("Length of the longest substring: " + str(non_repeat_substring("aabccbb")))
+    print("Length of the longest substring: " + str(non_repeat_substring("abbbb")))
+    print("Length of the longest substring: " + str(non_repeat_substring("abccde")))
+
+    print("Solutions 2:")
+    print("Length of the longest substring: " + str(A2_non_repeat_substring("aabccbb")))
+    print("Length of the longest substring: " + str(A2_non_repeat_substring("abbbb")))
+    print("Length of the longest substring: " + str(A2_non_repeat_substring("abccde")))
 
 main()
+
