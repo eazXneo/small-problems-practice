@@ -1,6 +1,6 @@
 # _source_ https://github.com/cl2333/Grokking-the-Coding-Interview-Patterns-for-Coding-Questions/blob/master/2.%20Pattern%20Two%20Pointers/Triplet%20Sum%20to%20Zero%20(medium).py
 # _Topic_ @2 Pattern: Two Pointers
-# _Q_ @2. b)
+# _Q_ @2. d)
 # _Difficulty_ medium
 
 # Problem Statement:
