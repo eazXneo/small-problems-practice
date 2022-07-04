@@ -48,7 +48,7 @@ def traverse(root):  # looks a bit more professional
 	if root is None:
 		return result
 
-	queue = deque()
+	queue = deque()  # use deque as queue DS...
 	queue.append(root)
 	while queue:
 		levelSize = len(queue)
@@ -68,8 +68,9 @@ def traverse(root):  # looks a bit more professional
 
 """ Asymptotics:
 For sols: O(n) <- accesses each node of the tree once and appends it to the array
-For mine: O(n) 
-Space complexity: 
+For mine: O(n) <- should also look at each element in tree once.
+Space complexity: O(n) <- need to store all values in tree in array of length 'n'
+	(Also queue takes at much n/2 space and so O(n) space for the queue too.)
 """
 
 

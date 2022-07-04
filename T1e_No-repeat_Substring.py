@@ -2,6 +2,7 @@
 # _Topic_ @1 Pattern: Sliding Window
 # _Q_ @1. e)
 # _Difficulty_ hard
+# time to solve: <1hr.
 
 # Problem Statement
 '''
