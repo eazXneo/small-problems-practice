@@ -2,7 +2,7 @@
 # _Topic_ @9 Pattern: Pattern Two Heaps
 # _Q_ @9. a)
 # _Difficulty_ medium
-# Time taken until for own solution, without compiling the code: 
+# Time taken until for own solution, without compiling the code: 30 min
 
 # Problem Statement
 """
@@ -22,3 +22,43 @@ Example 1:
 
 # My solution
 from heapq import *
+
+class MedianOfAStream:
+	# My solution (2 below)
+	minHeap = []
+	maxHeap = []
+	
+	def insert_num(self, num):
+		# check to which heap it should go
+		# check sizes of heaps to see if things need to be 
+		# moved from one heap to another...
+
+		if len(minHeap) == len(maxHeap) + 1:
+			# next maxHeap needs extra thing.
+			# it doesn't need evening out
+			if num <= minHeap[0]: # access smallest element without popping.
+				heappush(maxHeap, num)
+			# it does
+			else:
+				heappush(maxHeap, heappop(minHeap))
+				heappush(maxHeap, num)
+		elif len(minHeap) == len(maxHeap):
+			# now it has to go to minHeap.
+			if num >= minHeap[0]: # access smallest element without popping.
+				heappush(minHeap, num)
+			# it does
+			else:
+				heappush(minHeap, heappop(maxHeap))
+				heappush(minHeap, num)
+		else:
+			print("Error?")
+
+	def find_median(self):
+		# if uneven lengths:
+		if len(minHeap) == len(maxHeap) + 1:
+			return minHeap[0]
+		# if even take average (ignore integer overflow for now...)
+		elif len(minHeap) == len(maxHeap):
+			return (minHeap[0]+maxHeap[0]) / 2
+		else:
+			print("Error? Seems invalid heap length")

@@ -11,7 +11,6 @@ find if the tree has a path from root-to-leaf such that the sum of all the
 node values of that path equals ‘S’.
 """
 
-
 # from answer
 class TreeNode:
     def __init__(self, val, left=None, right=None):
