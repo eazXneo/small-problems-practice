@@ -26,7 +26,7 @@ def MY_has_path(root, sum):  # from Q I guess it returns boolean. # Q literally 
     current_sum = 0
     while len(stack) != 0:
         current_node = stack.pop()
-        # update current_sum:
+        # update current_sum:
         current_sum += current_node.val
 
         if current_sum == sum:
@@ -57,3 +57,23 @@ def has_path(root, sum):  # neat, but also recursion, which hurts brain :(
     # recursively call to traverse the left and right sub-tree
     # return true if any of the two recursive call return true
     return has_path(root.left, sum - root.val) or has_path(root.right, sum - root.val)
+
+""" Asymptotics:
+For sols: O(n) <- goes down every path possible in the tree once and so accesses 'n' nodes
+For mine: O(n) <- same reasoning as above
+Space complexity: O(n) <- because worst-case the tree is a linked list :(
+"""
+
+
+# Additional code
+def main():
+  root = TreeNode(12)
+  root.left = TreeNode(7)
+  root.right = TreeNode(1)
+  root.left.left = TreeNode(9)
+  root.right.left = TreeNode(10)
+  root.right.right = TreeNode(5)
+  print("Tree has path: " + str(has_path(root, 23)))
+  print("Tree has path: " + str(has_path(root, 16)))
+
+main()
