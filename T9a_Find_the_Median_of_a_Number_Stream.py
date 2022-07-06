@@ -69,19 +69,23 @@ class MY_MedianOfAStream:
 
 
 ## ANSWER
+## Python only has min-heap, so need negative signs when building "max-heap"
 class MedianOfAStream:
 	maxHeap = []  # containing first half of numbers
 	minHeap = []  # containing second half of numbers
 
 	def insert_num(self, num):
-		if not self.maxHeap or -self.maxHeap[0] >= num:
+		# 1) add to correct heap with inversion (-ve) if necessary
+		# 2) then restructure the heaps if necessary
+		# why did putting the "not self.maxHeap" in front work all of a sudden...?
+		if not self.maxHeap or -self.maxHeap[0] >= num:  # 1)
 			heappush(self.maxHeap, -num)
 		else:
 			heappush(self.minHeap, num)
 
 		# either both the heaps will have equal number of elements or max-heap will have one
-		# more element than the min-heap
-		if len(self.maxHeap) > len(self.minHeap) + 1:
+		# more element than the min-heap, if not below
+		if len(self.maxHeap) > len(self.minHeap) + 1:  # 2)
 			heappush(self.minHeap, -heappop(self.maxHeap))
 		elif len(self.maxHeap) < len(self.minHeap):
 			heappush(self.maxHeap, -heappop(self.minHeap))
