@@ -41,7 +41,7 @@ class MY_MedianOfAStream:
 			# it does
 			else:
 				heappush(self.maxHeap, heappop(self.minHeap))
-				heappush(self.maxHeap, num)
+				heappush(self.minHeap, num)
 		elif len(self.minHeap) == len(self.maxHeap) and len(self.minHeap) != 0:
 			# now it has to go to minHeap.
 			if num >= self.minHeap[0]: # access smallest element without popping.
@@ -49,7 +49,7 @@ class MY_MedianOfAStream:
 			# it does
 			else:
 				heappush(self.minHeap, heappop(self.maxHeap))
-				heappush(self.minHeap, num)
+				heappush(self.maxHeap, num)
 		else:
 			heappush(self.minHeap, num)
 			print("start??")
@@ -60,7 +60,10 @@ class MY_MedianOfAStream:
 			return self.minHeap[0]
 		# if even take average (ignore integer overflow for now...)
 		elif len(self.minHeap) == len(self.maxHeap):
-			return (self.minHeap[0]+self.maxHeap[0]) / 2
+			# self.maxHeap[-1] is O(log(n)) and so defeats the purpose.
+			# now I get why there were negative signs for the max_hep all along.
+			# why isn't there just the option for  maxheap. At least I kind of get it now.
+			return (self.minHeap[0]+self.maxHeap[-1]) / 2
 		else:
 			print("Error? Seems invalid heap length")
 
