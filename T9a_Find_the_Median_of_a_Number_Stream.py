@@ -23,7 +23,7 @@ Example 1:
 # My solution
 from heapq import *
 
-class MedianOfAStream:
+class MY_MedianOfAStream:
 	# My solution (2 below)
 	minHeap = []
 	maxHeap = []
@@ -33,32 +33,94 @@ class MedianOfAStream:
 		# check sizes of heaps to see if things need to be 
 		# moved from one heap to another...
 
-		if len(minHeap) == len(maxHeap) + 1:
+		if len(self.minHeap) == len(self.maxHeap) + 1:
 			# next maxHeap needs extra thing.
 			# it doesn't need evening out
-			if num <= minHeap[0]: # access smallest element without popping.
-				heappush(maxHeap, num)
+			if num <= self.minHeap[0]: # access smallest element without popping.
+				heappush(self.maxHeap, num)
 			# it does
 			else:
-				heappush(maxHeap, heappop(minHeap))
-				heappush(maxHeap, num)
-		elif len(minHeap) == len(maxHeap):
+				heappush(self.maxHeap, heappop(self.minHeap))
+				heappush(self.maxHeap, num)
+		elif len(self.minHeap) == len(self.maxHeap) and len(self.minHeap) != 0:
 			# now it has to go to minHeap.
-			if num >= minHeap[0]: # access smallest element without popping.
-				heappush(minHeap, num)
+			if num >= self.minHeap[0]: # access smallest element without popping.
+				heappush(self.minHeap, num)
 			# it does
 			else:
-				heappush(minHeap, heappop(maxHeap))
-				heappush(minHeap, num)
+				heappush(self.minHeap, heappop(self.maxHeap))
+				heappush(self.minHeap, num)
 		else:
-			print("Error?")
+			heappush(self.minHeap, num)
+			print("start??")
 
 	def find_median(self):
 		# if uneven lengths:
-		if len(minHeap) == len(maxHeap) + 1:
-			return minHeap[0]
+		if len(self.minHeap) == len(self.maxHeap) + 1:
+			return self.minHeap[0]
 		# if even take average (ignore integer overflow for now...)
-		elif len(minHeap) == len(maxHeap):
-			return (minHeap[0]+maxHeap[0]) / 2
+		elif len(self.minHeap) == len(self.maxHeap):
+			return (self.minHeap[0]+self.maxHeap[0]) / 2
 		else:
 			print("Error? Seems invalid heap length")
+
+
+## ANSWER
+class MedianOfAStream:
+	maxHeap = []  # containing first half of numbers
+	minHeap = []  # containing second half of numbers
+
+	def insert_num(self, num):
+		if not self.maxHeap or -self.maxHeap[0] >= num:
+			heappush(self.maxHeap, -num)
+		else:
+			heappush(self.minHeap, num)
+
+		# either both the heaps will have equal number of elements or max-heap will have one
+		# more element than the min-heap
+		if len(self.maxHeap) > len(self.minHeap) + 1:
+			heappush(self.minHeap, -heappop(self.maxHeap))
+		elif len(self.maxHeap) < len(self.minHeap):
+			heappush(self.maxHeap, -heappop(self.minHeap))
+
+	def find_median(self):
+		if len(self.maxHeap) == len(self.minHeap):
+			# we have even number of elements, take the average of middle two elements
+			return -self.maxHeap[0] / 2.0 + self.minHeap[0] / 2.0
+
+		# because max-heap will have one more element than the min-heap
+		return -self.maxHeap[0] / 1.0  # to have decimals...?
+
+""" Asymptotics:
+For sols: insert_num() = inserting a number into the heap means, the heap has to be 
+	heapified(?) again and so O(log (n)) time.
+	find_median() = O(1) <- because just pick up top number(s) from heap.
+For mine: find_median should be the same and insert_num should also be the same, 
+	same heap-specific methods are being  used (heappush & heappop)
+Space complexity: O(n) <- however many numbers you add to the heap
+"""
+
+
+# Additional code
+def main():
+	print("My answer:")
+	medianOfAStream = MY_MedianOfAStream()
+	medianOfAStream.insert_num(3)
+	medianOfAStream.insert_num(1)
+	print("The median is: " + str(medianOfAStream.find_median()))
+	medianOfAStream.insert_num(5)
+	print("The median is: " + str(medianOfAStream.find_median()))
+	medianOfAStream.insert_num(4)
+	print("The median is: " + str(medianOfAStream.find_median()))
+
+	print("Solutions:")
+	medianOfAStream = MedianOfAStream()
+	medianOfAStream.insert_num(3)
+	medianOfAStream.insert_num(1)
+	print("The median is: " + str(medianOfAStream.find_median()))
+	medianOfAStream.insert_num(5)
+	print("The median is: " + str(medianOfAStream.find_median()))
+	medianOfAStream.insert_num(4)
+	print("The median is: " + str(medianOfAStream.find_median()))
+
+main()
