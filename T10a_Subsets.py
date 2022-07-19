@@ -16,7 +16,7 @@ Output: [], [1], [5], [3], [1,5], [1,3], [5,3], [1,5,3]
 """
 
 # My solution
-def find_subsets(nums):
+def MY_find_subsets(nums):
 	# recursion?
 	# floop?
 	all_subsets = [[]]
@@ -26,3 +26,17 @@ def find_subsets(nums):
 			all_subsets.append(current_level[j]+[nums[number]])
 
 	return all_subsets
+
+# ANSWER
+def find_subsets(nums):
+	subsets = []
+	# start by adding the empty subset
+	subsets.append([])
+	for currentNumber in nums:
+		# we will take all existing subsets and insert the current number in them to create new subsets
+		n = len(subsets)
+		for i in range(n):
+			# create a new subset from the existing subset and insert the current element to it
+			set = subsets[i].copy()
+			set.append(currentNumber)
+			subsets.append(set)
