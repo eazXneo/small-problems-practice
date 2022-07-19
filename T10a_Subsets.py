@@ -40,3 +40,11 @@ def find_subsets(nums):
 			set = subsets[i].copy()
 			set.append(currentNumber)
 			subsets.append(set)
+	return subsets
+
+""" Asymptotics:
+For sols: O(2^n), where 'n' is the length of 'nums'. Each level doubles the number of already 
+	existing elements.
+For mine: O(2^n), hopefully.
+Space complexity: O(2^n), to hold all combinations.
+"""
