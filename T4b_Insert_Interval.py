@@ -25,27 +25,48 @@ Explanation: After insertion, since [1,4] overlaps with [2,3], we merged them in
 """
 
 # My solution:
+# passes given test-cases we'll leave it here.
+# it's very MESSY.
 def insert_interval(intervals, new_interval):
 	# trivial: intervals is empty
 	temp = len(intervals)
 	if len(intervals)==0:
 		intervals.append(new_interval)
-
+	new_list = []
+	count = 1
 	# insert new_interval into intervals.
 	# trying basic approach
 	new_interv_start = new_interval[0]
 	new_interv_end = new_interval[1]
 	for i in range(len(intervals)):
 		interval = intervals[i]
-		if interval[0] <= new_interv_end:
-			new_interv_end = max(interval[1], new_interv_end)
-		else:
-			intervals.insert(i+1, new_interval)
+		if interval[1] < new_interv_start:
+			new_list.append(interval)
+			count += 1
+			if intervals[i+1][0] > new_interv_end:
+				new_list.append(new_interval)
+				break
+			elif intervals[i + 1][1] > new_interv_end:
+				new_list.append([new_interval[0], max(new_interv_end, intervals[i + 1][1])])
+				break
+			else:
+				new_interv_end = max(intervals[i + 1][1], new_interv_end)
+		elif interval[1] >= new_interv_start:
+			# find the end NOW.
+			end = new_interv_end
+			while count<temp and new_interv_end>intervals[count][0]:
+				if new_interv_end<=intervals[count][1]:
+					end = max(new_interv_end, intervals[count][1])
+				count += 1
+			new_list.append([new_interv_start, end])
 			break
-	if new_interval_start > intervals[-1][1]:
-		intervals.append(new_interval)
 
-	return intervals
+	# add remaining intervals
+	while count < temp:
+		new_list.append(intervals[count])
+		count += 1
+
+	return new_list
 
 # ANSWER
 # looks smart. I think that was my first approach and then I doubted myself
