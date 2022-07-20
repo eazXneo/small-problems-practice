@@ -1,5 +1,5 @@
 # https://github.com/cl2333/Grokking-the-Coding-Interview-Patterns-for-Coding-Questions/blob/master/10.%20Pattern%20Subsets/Subsets%20(easy).py
-# _Topic_ @9 Pattern: Subsets
+# _Topic_ @10 Pattern: Subsets
 # _Q_ @10. a)
 # _Difficulty_ easy
 # Time taken until for own solution, without compiling the code: 20 min
@@ -49,6 +49,8 @@ For mine: O(2^n), hopefully.
 Space complexity: O(2^n), to hold all combinations.
 """
 
+
+# Additional code
 def main():
 	print("My answer:")
 	print("Here is the list of subsets: " + str(MY_find_subsets([1, 3])))
