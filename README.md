@@ -6,6 +6,8 @@ Currently includes code patterns:
 * Two pointers (2)
 * Fast & Slow Pointers (2)
 * Merge Intervals (1)
-* Cyclic Sort
+* Cyclic Sort (1)
+* In-place Reversal of a LinkedList (1)
+* Tree Breadth First Search (1)
 
-LeetCode Qs answered: 2
+LeetCode Qs answered: 4
