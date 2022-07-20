@@ -16,7 +16,7 @@ Output: [], [1], [5], [3], [1,5], [1,3], [5,3], [1,5,3]
 """
 
 # My solution
-def MY_find_subsets(nums):
+def MY_find_subsets(nums):  # really good, good job.
 	# recursion?
 	# floop?
 	all_subsets = [[]]
@@ -48,3 +48,14 @@ For sols: O(2^n), where 'n' is the length of 'nums'. Each level doubles the numb
 For mine: O(2^n), hopefully.
 Space complexity: O(2^n), to hold all combinations.
 """
+
+def main():
+	print("My answer:")
+	print("Here is the list of subsets: " + str(MY_find_subsets([1, 3])))
+	print("Here is the list of subsets: " + str(MY_find_subsets([1, 5, 3])))
+
+	print("Solutions:")
+	print("Here is the list of subsets: " + str(find_subsets([1, 3])))
+	print("Here is the list of subsets: " + str(find_subsets([1, 5, 3])))
+
+main()
