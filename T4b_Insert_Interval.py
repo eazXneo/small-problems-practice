@@ -70,7 +70,7 @@ def insert_interval(intervals, new_interval):
 
 # ANSWER
 # looks smart. I think that was my first approach and then I doubted myself
-def insert(intervals, new_interval):
+def insert(intervals, new_interval):  # look at the use of while loops!
 	merged = []
 	i, start, end = 0, 0, 1
 	# skip (and add to output) all intervals that come before the 'new_interval'
