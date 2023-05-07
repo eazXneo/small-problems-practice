@@ -2,7 +2,7 @@
 # _Topic_ @5 Pattern: Cyclic Sort
 # _Q_ @5. f)
 # _Difficulty_ easy
-# Time taken until for own solution, without compiling the code:
+# Time taken until for own solution, without compiling the code: 30 min
 
 # Problem Statement
 """
