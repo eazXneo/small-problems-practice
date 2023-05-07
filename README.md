@@ -9,5 +9,7 @@ Currently includes code patterns:
 * Cyclic Sort (1)
 * In-place Reversal of a LinkedList (1)
 * Tree Breadth First Search (1)
+* Depth First Search (DFS) (1)
+* Two Heaps (1)
 
-LeetCode Qs answered: 4
+LeetCode Qs answered: 5
